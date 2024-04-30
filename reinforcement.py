@@ -64,7 +64,7 @@ for i in range(1, 100001):
 print("Training finished.\n")
 env.close()
 
-env = gym.make("Taxi-v3", render_mode="ansi")
+env = gym.make("Taxi-v3", render_mode="human")
 
 total_epochs, total_penalties = 0, 0
 episodes = 100

@@ -1,8 +1,7 @@
 import random
 
 class Player:
-    def __init__(self, name, hit, dodge, speed):
-        self.name = name
+    def __init__(self, hit, dodge, speed):
         # skill when player reach learning phase
         self.hit = hit
         self.dodge = dodge
@@ -48,7 +47,6 @@ class Player:
             elif random.randint(1,10) == 1:
                 self.speed = self.speed + 1
 
-        print( 'hit:', str(hitRate),'dodge:', str(dodgeRate),'speed:', str(speed))
         self.enemyCount += 1
         while True:
             self.time += 1
@@ -59,14 +57,12 @@ class Player:
                 # chance of player dodge the attack
                 if random.randint(1, enemy.intelligence * 2) > chance:
                     self.health = self.health - enemy.damage
-                    print(self.health,self.time)
             
             # player attack enemy
             if self.time % speed == 0:
                 chance = hitRate if self.health > 30 else max(hitRate - 1, 1)
                 if random.randint(1,enemy.intelligence*2) <= chance:
                     enemy.health -= 1
-                    print("hit", self.time)
             
 
             # check if player or enemy have died
@@ -79,7 +75,7 @@ class Player:
                 break
 
         self.healthChange = self.healthChange - self.health
-        if self.healthChange < 0:
+        if self.healthChange <= 0:
             self.healthChange += 100
             
 
@@ -91,6 +87,7 @@ class Player:
         level = 5 
 
         if self.death: 
+            level += 1
             if self.healthChange < 20:
                 if self.time < 10:
                     level += 1
@@ -104,7 +101,7 @@ class Player:
             else:
                 if self.time < 40:
                     level += 2
-                elif self.time < 60:
+                elif self.time < 80:
                     level += 1
         else:
             if self.healthChange < 20:
@@ -118,7 +115,13 @@ class Player:
             elif self.time > 50:
                 level += 1
         
+        if level >= 8 or level <= 2:
+            return -2
+        elif level > 6 or level < 4:
+            return -1
+        else: 
+            return 1
         
-        return level
+        
         
         

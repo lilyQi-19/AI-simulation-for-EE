@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import gymnasium as gym
-import seaborn as sns
 from IPython.display import clear_output
 
 from Player import Player
@@ -11,8 +10,6 @@ from Enemy import Enemy
 from environment import Environment
 # import torch.optim as optim
 # from torch.distributions import Categorical
-sns.set()
-
 
 env = Environment()
 env.reset() # reset environment to a new, random state
@@ -122,9 +119,9 @@ ax.plot(episodeNum, np.full(len(episodeNum),(controlReward/100)), '-.')
 
 ax.grid(True, which='both')
 
-fig.suptitle('average rewards per episodes trained')
-ax.set_xlabel("episode trained")
-ax.set_ylabel("average reward")
+fig.suptitle('Average rewards per episodes trained')
+ax.set_xlabel("Episodes trained")
+ax.set_ylabel("Average reward")
 
 plt.show()
 
@@ -151,7 +148,7 @@ step_award = step_award / 10000
 
 # control: random step taken
 controlReward = np.zeros(101)
-for i in range(100):
+for i in range(10000):
     state = env.reset()
     
     done = False
@@ -165,7 +162,7 @@ for i in range(100):
             round += 1
             controlReward[round] += r
 
-controlReward = controlReward / 100
+controlReward = controlReward / 10000
 
 # plot reward per step
 plt.style.use('_mpl-gallery')
@@ -176,9 +173,9 @@ ax.plot(step, controlReward, '-.')
 
 ax.grid(True, which='both')
 
-fig.suptitle('average reward per enemy faced')
-ax.set_xlabel("enemy count")
-ax.set_ylabel("average reward")
+fig.suptitle('Average reward per enemy faced')
+ax.set_xlabel("Enemy count")
+ax.set_ylabel("Average reward")
 
 plt.show()
 
@@ -228,9 +225,9 @@ ax.plot(level, Clevel_reward, '-.')
 
 ax.grid(True, which='both')
 
-fig.suptitle('average reward for different average player skill level')
-ax.set_xlabel("average player skill level")
-ax.set_ylabel("average reward")
+fig.suptitle('Average reward for different average player skill level')
+ax.set_xlabel("Average player skill level")
+ax.set_ylabel("Average reward")
 
 plt.show()
     

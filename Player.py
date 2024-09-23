@@ -52,7 +52,7 @@ class Player:
             self.time += 1
             
             # check damage
-            if self.time % enemy.attackSpace == 0:
+            if self.time % enemy.attackInterval == 0:
                 chance = dodgeRate if self.health > 30 else min(dodgeRate + 1, 10)
                 # chance of player dodge the attack
                 if random.randint(1, enemy.intelligence * 2) > chance:
